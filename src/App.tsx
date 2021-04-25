@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {GIT_HUB_URL} from './constants/AppConstants';
 
 const CardList = (props:any) => {
   return props.profiles.map((profile:any) => {
@@ -29,7 +30,7 @@ class Form extends React.Component<any, any> {
   }
 
   getProfile() {
-    fetch('https://api.github.com/users/'+this.state.userName)
+    fetch(GIT_HUB_URL.concat(this.state.userName))
           .then(res => res.json())
           .then(j => {
             console.log(j);
