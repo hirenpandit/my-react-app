@@ -4,8 +4,8 @@ import {GIT_HUB_URL} from './constants/AppConstants';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row } from 'react-bootstrap';
+import Image from 'react-bootstrap/Image';
 
 const CardList = (props:any) => {
   return props.profiles.map((profile:any) => {
@@ -17,14 +17,19 @@ const CardList = (props:any) => {
 
 const Card = (props:any) => {
   return <Row> 
-    <div style={{margin: '1em'}}>
-            <img width="75" src={props.avatar_url} />
-            <div style={{display: 'inline-block', marginLeft: 10}}>
-              <div style={{fontSize:'1.25em', fontWeight: 'bold'}}>{props.name}</div>
-              <div>{props.company}</div>
-            </div>
-        </div>
-  </Row>
+            <Col sm="2">
+              <Image src={props.avatar_url} thumbnail/>   
+            </Col>
+            <Col>
+              <Row className="justify-content-md-left">
+                <div style={{display: 'inline-block', marginLeft: 10}}>
+                  <div style={{fontSize:'1.25em', fontWeight: 'bold'}}>{props.name}</div>
+                  <div>{props.company}</div>
+                </div> 
+              </Row>
+               
+            </Col> 
+          </Row>
   
 }
 
