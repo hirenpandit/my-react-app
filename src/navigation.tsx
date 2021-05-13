@@ -4,12 +4,19 @@ import Nav from 'react-bootstrap/Nav';
 import {
     BrowserRouter as Router,
     Route,
-    Link,
     Switch    
 } from 'react-router-dom';
 import App from './App';
+import Company from './company/list-company';
+import {CompanyPorp} from './company/company';
 
 export default function Navigation() {
+    const companies = new Array({
+        id: 123,
+        name: "mastercard",
+        city: "vadodara",
+        region: "gujarat"
+    })
     return <Router>
             <Navbar bg="light" expand="lg">
                     <Navbar.Brand href="#home">My-react-app</Navbar.Brand>
@@ -24,6 +31,10 @@ export default function Navigation() {
                 <Switch>
                     <Route path="/app">
                         <App title="The GitHub Card App"/>
+                    </Route>
+                    
+                    <Route>
+                        <Company companies = {companies}/>
                     </Route>
                 </Switch>
             </Router>
