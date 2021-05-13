@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import {GIT_HUB_URL} from './constants/AppConstants';
 import Button from 'react-bootstrap/Button';
@@ -8,11 +8,12 @@ import { Col, Row } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 
 const CardList = (props:any) => {
-  return props.profiles.map((profile:any) => {
-    return <Container>
-            <Card key={profile.id} {...profile}/>
-           </Container>
-  });
+  return <Container>
+          {
+            props.profiles
+                  .map((profile:any)=> <Card key={profile.id} {...profile} />)
+          }
+        </Container>
 }
 
 const Card = (props:any) => {
