@@ -1,24 +1,34 @@
 import React from 'react';
 import './App.css';
 import {GIT_HUB_URL} from './constants/AppConstants';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Col, Row } from 'react-bootstrap';
 
 const CardList = (props:any) => {
   return props.profiles.map((profile:any) => {
-    return <Card key={profile.id} {...profile}/>
+    return <Container>
+            <Card key={profile.id} {...profile}/>
+           </Container>
   });
 }
 
 const Card = (props:any) => {
-  return <div style={{margin: '1em'}}>
+  return <Row> 
+    <div style={{margin: '1em'}}>
             <img width="75" src={props.avatar_url} />
             <div style={{display: 'inline-block', marginLeft: 10}}>
               <div style={{fontSize:'1.25em', fontWeight: 'bold'}}>{props.name}</div>
               <div>{props.company}</div>
             </div>
         </div>
+  </Row>
+  
 }
 
-class Form extends React.Component<any, any> {
+class CardForm extends React.Component<any, any> {
 
   constructor(props: any) {
     super(props);
@@ -29,20 +39,39 @@ class Form extends React.Component<any, any> {
     userName: ''
   }
 
-  getProfile() {
+  getProfile(e:any) {
+    e.preventDefault();
     fetch(GIT_HUB_URL.concat(this.state.userName))
           .then(res => res.json())
           .then(j => {
             console.log(j);
             this.props.addNewProfile(j);
           });
+    this.setState({
+      userName: ''
+    })
   }
   render() {
     return <>
-      <input value={this.state.userName}  
-              onChange={(event) => this.setState({userName: event.target.value})} 
-              placeholder="GitHub Username"/>
-      <button onClick={this.getProfile}>Add Profile</button>
+      <Container fluid>
+      <Form onSubmit={this.getProfile}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Control value={this.state.userName} onChange={(event) => this.setState({userName: event.target.value})} size="lg" placeholder="GitHub username" />
+        </Form.Group>
+        <Row className="justify-content-md-center">
+          <Col lg="2">
+            <Button variant="primary" type="submit">
+              Add Card
+            </Button>
+          </Col>
+          <Col lg="1">
+            <Button variant="secondary" type="clear">
+              Clear
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+      </Container>
     </>
   }
 }
@@ -62,9 +91,17 @@ class App extends React.Component<any, any> {
 
     render() {
       return <>
-        <h1>{this.props.title}</h1>
-        <Form addNewProfile={this.addProfile}/>
-        <CardList profiles = {this.state.profiles}/>
+        <Container>
+          <Row className="justify-content-md-center">
+            <h1 className="center">{this.props.title}</h1>  
+          </Row>
+          <Row className="justify-content-md-center">
+            <CardForm addNewProfile={this.addProfile}/>
+          </Row>
+          <Row>
+            <CardList profiles = {this.state.profiles}/>
+          </Row>
+        </Container>
       </>
     }
 }
