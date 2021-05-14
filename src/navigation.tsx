@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom';
 import App from './App';
 import Company from './company/list-company';
-import {CompanyPorp} from './company/company';
 
 export default function Navigation() {
     const companies = new Array({
