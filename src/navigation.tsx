@@ -29,12 +29,7 @@ export default function Navigation() {
         return <Login setToken={setToken} />
     }
     
-    const companies = new Array({
-        id: 123,
-        name: "mastercard",
-        city: "vadodara",
-        region: "gujarat"
-    })
+    const companies: any = [];
     return <Router>
             <Navbar bg="light" expand="lg">
                     <Navbar.Brand href="#home">My-react-app</Navbar.Brand>
