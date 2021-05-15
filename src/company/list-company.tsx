@@ -6,10 +6,6 @@ import AddCompany from './add-company';
 
 export default class Company extends React.Component<any, any> {
 
-    constructor(props:CompanyPorp[]){
-        super(props);
-    }
-
     state =  {
         companies: this.props.companies
     }

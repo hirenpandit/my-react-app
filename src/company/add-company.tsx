@@ -1,12 +1,9 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { CompanyPorp } from './company';
 
 export default class AddCompany extends React.Component<any, any> {
-    constructor(props:any) {
-        super(props);
-    }
+    
     fakeId = 124;
     state = {
         company: {
